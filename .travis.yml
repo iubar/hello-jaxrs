@@ -1,0 +1,13 @@
+language: java
+jdk: openjdk10
+script: mvn install -DskipTests=true -B -V
+deploy:
+  provider: releases
+  api_key: "$GH_TOKEN"
+  skip_cleanup: true
+  file_glob: true
+  file: "target/hello-jaxrs.war"
+  name: $YOUR_RELEASE_NAME
+  body: $YOUR_RELEASE_CONTENT
+  on:
+    branch: master  
