@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.Application;
  * Configures the Jakarta REST application.
  * 
  */
-@ApplicationPath("")
+@ApplicationPath("/")
 public class ApplicationConfig extends Application {
  
 //    @Override
@@ -17,5 +17,5 @@ public class ApplicationConfig extends Application {
 //        set.add(Hello.class);
 //        return set;
 //    }
-	
+
 }
