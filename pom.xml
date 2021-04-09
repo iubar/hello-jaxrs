@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>it.iubar.pom</groupId>
+		<artifactId>iubar-pom-next</artifactId>
+		<version>0.0.1</version>
+	</parent>    
+    <groupId>it.iubar</groupId>
+    <artifactId>hello-jaxrs</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+    <name>Hello JAX-RS</name>
+    <description>Hello - Jakarta RESTful Web Services</description>
+  
+    <properties>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <version.jakartaee>9.0.0</version.jakartaee>
+        <version.jersey>3.0.1</version.jersey>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>        
+    </properties>
+
+
+    <build>  
+        <finalName>${project.artifactId}</finalName>
+		<plugins>
+		
+<!-- 		<plugin> -->
+<!-- 		    <groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 		    <artifactId>tomcat8-maven-plugin</artifactId> -->
+<!-- 		    <version>2.2</version> -->
+<!-- 		    <configuration> -->
+<!-- 		        <url>http://localhost:8080/manager/text</url> -->
+<!-- 		        <server>TomcatServer</server> -->
+<!-- 		        <path>/myapp</path> -->
+<!-- 		    </configuration> -->
+<!-- 		</plugin> -->
+      		 									
+		</plugins>      
+    </build>
+  
+    <dependencies>
+		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->    
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+<!--             <artifactId>jakarta.jakartaee-web-api</artifactId> -->
+       <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${version.jakartaee}</version>
+            <scope>provided</scope>
+        </dependency>                
+ 
+    </dependencies>
+    
+</project>
