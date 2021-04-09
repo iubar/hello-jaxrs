@@ -3,7 +3,7 @@ jdk: openjdk10
 script: mvn install -DskipTests=true -B -V
 deploy:
   provider: releases
-  api_key: "$GH_TOKEN"
+  api_key: "$GITHUB_OAUTH_TOKEN"
   skip_cleanup: true
   file_glob: true
   file: "target/hello-jaxrs.war"
