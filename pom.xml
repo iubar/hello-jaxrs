@@ -28,5 +28,5 @@
             <version>${version.jakartaee}</version>
             <scope>provided</scope>
         </dependency>
-     </dependencies
+     </dependencies>
 </project>
