@@ -1,13 +1,16 @@
 language: java
 jdk: openjdk10
-script: mvn install -DskipTests=true -B -V
+env:
+  - RELEASE_NAME="A release"
+  - RELEASE_CONTENT="Some content"
+script: 
+  - mvn install -DskipTests=true -B -V
 deploy:
   provider: releases
   api_key: "$GITHUB_OAUTH_TOKEN"
   skip_cleanup: true
-  file_glob: true
   file: "target/hello-jaxrs.war"
-  name: $YOUR_RELEASE_NAME
-  body: $YOUR_RELEASE_CONTENT
+  name: $RELEASE_NAME
+  body: $RELEASE_CONTENT
   on:
     branch: master  
