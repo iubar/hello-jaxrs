@@ -1,13 +1,14 @@
 language: java
 jdk: openjdk10
+install: true # Without that statement, Travis will run 'mvn install' on pom.xml before the script step.  
 script: 
   - mvn install -DskipTests=true -B -V
 deploy:
   provider: releases
-  api_key: "$GITHUB_OAUTH_TOKEN"
+  api_key: ${GITHUB_OAUTH_TOKEN}
   skip_cleanup: true
   file: "target/hello-jaxrs.war"
-  name: $RELEASE_NAME
-  body: $RELEASE_CONTENT
+  name: " A release"
+  body: "Some content"
   on:
-    branch: master  
+    branch: main  
