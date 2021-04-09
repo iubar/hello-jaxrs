@@ -9,7 +9,9 @@
     <description>Hello - Jakarta RESTful Web Services</description>  
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <version.jakartaee>9.0.0</version.jakartaee>       
+        <version.jakartaee>9.0.0</version.jakartaee>
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <build>  
         <finalName>${project.artifactId}</finalName>    
