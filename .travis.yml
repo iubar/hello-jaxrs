@@ -1,8 +1,5 @@
 language: java
 jdk: openjdk10
-env:
-  - RELEASE_NAME="A release"
-  - RELEASE_CONTENT="Some content"
 script: 
   - mvn install -DskipTests=true -B -V
 deploy:
