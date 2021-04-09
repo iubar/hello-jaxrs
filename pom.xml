@@ -9,7 +9,7 @@
     <description>Hello - Jakarta RESTful Web Services</description>
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <version.jakartaee>9.0.0</version.jakartaee>
+        <version.jakartaee>8.0.0</version.jakartaee>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <jdk.source.version>1.8</jdk.source.version>
@@ -24,7 +24,7 @@
         <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
         <dependency>
             <groupId>jakarta.platform</groupId>
-       <artifactId>jakarta.jakartaee-api</artifactId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${version.jakartaee}</version>
             <scope>provided</scope>
         </dependency>
