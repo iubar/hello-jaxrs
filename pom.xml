@@ -15,13 +15,10 @@
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <version.jakartaee>9.0.0</version.jakartaee>
-		<version.jersey>3.0.1</version.jersey>
+	<version.jersey>3.0.1</version.jersey>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <jdk.source.version>1.8</jdk.source.version>
-        <jdk.target.version>1.8</jdk.target.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>  
         <finalName>${project.artifactId}</finalName>
