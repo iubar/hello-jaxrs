@@ -1,6 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion> 
+    <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>it.iubar.pom</groupId>
+		<artifactId>iubar-pom-next</artifactId>
+		<version>0.0.1</version>
+	</parent> 	
     <groupId>it.iubar</groupId>
     <artifactId>hello-jaxrs</artifactId>
     <version>1.0</version>
@@ -10,6 +15,7 @@
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <version.jakartaee>9.0.0</version.jakartaee>
+		<version.jersey>3.0.1</version.jersey>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <jdk.source.version>1.8</jdk.source.version>
@@ -28,5 +34,19 @@
             <version>${version.jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+		<dependency>
+		    <groupId>org.glassfish.jersey.core</groupId>
+		    <artifactId>jersey-client</artifactId>
+		    <version>${version.jersey}</version>
+			<scope>test</scope> 
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
+		<dependency>
+		    <groupId>org.glassfish.jersey.inject</groupId>
+		    <artifactId>jersey-hk2</artifactId>
+		    <version>${version.jersey}</version>
+			<scope>test</scope> 
+		</dependency>		
      </dependencies>
 </project>
