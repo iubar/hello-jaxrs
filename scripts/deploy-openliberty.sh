@@ -12,5 +12,6 @@ echo "$MY_PATH"
 cd /opt/openliberty21/wlp
 sudo cp $MY_PATH/../target/hello-jaxrs.war ./usr/servers/myServer/dropins/
 
-
+sudo ls -la ./usr/servers/myServer/apps/expanded/
+sudo ls -la ./usr/servers/myServer/dropins/
 
