@@ -22,6 +22,7 @@ pipeline {
         }
         stage('Analyze') {
             steps {
+				// Pipeline's script step expects Groovy script, not Bash scrip
 				script {
 					try {
 						sh 'sonar-scanner'
@@ -37,7 +38,7 @@ pipeline {
                 sh 'mvn $MAVEN_CLI_OPTS -DskipTests=true deploy'
             }
         }
-// curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
+		// Example: curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
 		stage ('Deploy2') {
             steps {
 				sh '''
@@ -49,15 +50,8 @@ pipeline {
 				cp target/hello-jaxrs.war ${LIBERTY_FOLDER}/dropins/
 				${LIBERTY_ROOT}/bin/server start myserver --clean				
 				nc -v -z -w3 $HOST 9080
-				nc -v -z -w3 $HOST 9443				
-				#!/bin/bash				
-				HTTP_CODE=$(curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE})
-				if [ $HTTP_CODE = 200 ]; then
-					echo "INFO: response code is $HTTP_CODE"
-				else
-					echo "ERROR: response code is $HTTP_CODE"
-					exit 1
-				fi
+				nc -v -z -w3 $HOST 9443						
+				sh ./client.sh
 				'''
             }
         }
