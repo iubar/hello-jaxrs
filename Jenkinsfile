@@ -51,7 +51,13 @@ pipeline {
 				${LIBERTY_ROOT}/bin/server start myserver --clean				
 				nc -v -z -w3 $HOST 9080
 				nc -v -z -w3 $HOST 9443						
-				sh ./client.sh
+				HTTP_CODE=$(curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE})
+				if [ $HTTP_CODE = 200 ]; then
+					echo "INFO: response code is $HTTP_CODE"
+				else
+					echo "ERROR: response code is $HTTP_CODE"
+					exit 1
+				fi
 				'''
             }
         }
@@ -62,10 +68,10 @@ pipeline {
 			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates versions:display-plugin-updates'
 			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates'          
         }	
-        //changed {
-        	// echo "CURRENT STATUS: ${currentBuild.currentResult}"
-            // sh "curl -H 'JENKINS: Pipeline Hook Iubar' -i -X GET -G ${env.IUBAR_WEBHOOK_URL} -d status=${currentBuild.currentResult} -d project_name=${JOB_NAME}"
-        //}
+        changed {
+			echo "CURRENT STATUS: ${currentBuild.currentResult}"
+			sh "curl -H 'JENKINS: Pipeline Hook Iubar' -i -X GET -G ${env.IUBAR_WEBHOOK_URL} -d status=${currentBuild.currentResult} -d project_name='${JOB_NAME}'"
+        }
 		cleanup { // see https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline
 			cleanWs() // Workspace Cleanup Plugin (https://jenkins.io/doc/pipeline/steps/ws-cleanup/#cleanws-delete-workspace-when-build-is-done)
 			echo "Deleting ${env.WORKSPACE}@tmp ..."
