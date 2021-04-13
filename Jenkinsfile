@@ -11,6 +11,8 @@ pipeline {
 	}    
 	environment {	
 		MAVEN_CLI_OPTS = '--batch-mode --show-version'
+		HOST = '127.0.0.1'
+		ROUTE = 'hello-jaxrs/hello'		
 	}    
     stages {
 		stage ('Build') {
