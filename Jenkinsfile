@@ -1,7 +1,7 @@
 pipeline {
     agent {    
     	docker {   	
-    		image 'iubar-maven-ubuntu'
+    		image 'iubar-openliberty'
     		label 'docker'
     		args '-v ${HOME}/.m2:/home/jenkins/.m2:rw,z -v ${HOME}/.sonar:/home/jenkins/.sonar:rw,z'
     	} 
@@ -34,7 +34,26 @@ pipeline {
             steps {
                 sh 'mvn $MAVEN_CLI_OPTS -DskipTests=true deploy'
             }
-        }         	
+        }
+		stage ('Deploy2') {
+            steps {
+				sh '''
+				nc -v -z -w3 $HOST 9080
+				nc -v -z -w3 $HOST 9443
+				echo ${LIBERTY_ROOT}
+				cp target/hello-jaxrs.war ${LIBERTY_ROOT}/usr/servers/myserver/dropins/
+				${LIBERTY_ROOT}/bin/server start myserver --clean				
+				# curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "
+				HTTP_CODE=$(curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE})
+				if [ $HTTP_CODE = 200 ]; then
+					echo "INFO: response code is $HTTP_CODE"
+				else
+					echo "ERROR: response code is $HTTP_CODE"
+					exit 1
+				fi
+				'''
+            }
+        }
     }
 	post {
         success {
