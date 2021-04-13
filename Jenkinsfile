@@ -40,8 +40,9 @@ pipeline {
 		stage ('Deploy2') {
             steps {
 				sh '''
-				echo ${LIBERTY_ROOT}
-				cp target/hello-jaxrs.war ${LIBERTY_ROOT}/usr/servers/myserver/dropins/
+				ls -la ${LIBERTY_ROOT}
+				ls -la ${LIBERTY_FOLDER}
+				cp target/hello-jaxrs.war ${LIBERTY_FOLDER}/dropins/
 				${LIBERTY_ROOT}/bin/server start myserver --clean				
 				nc -v -z -w3 $HOST 9080
 				nc -v -z -w3 $HOST 9443				
