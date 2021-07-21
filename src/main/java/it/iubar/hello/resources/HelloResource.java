@@ -1,4 +1,4 @@
-package it.iubar.hello;
+package it.iubar.hello.resources;
 
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.GET;
@@ -11,7 +11,7 @@ import jakarta.ws.rs.core.Response;
  */
 
 @Path("hello")
-public class Hello {
+public class HelloResource {
     
     @GET
     public Response hello(){
