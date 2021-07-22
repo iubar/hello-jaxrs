@@ -1,5 +1,8 @@
 package it.iubar.hello.resources;
 
+import java.io.File;
+import java.nio.file.Paths;
+
 import it.iubar.hello.controllers.TemperatureController;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -19,10 +22,10 @@ public class TemperatureResource {
 	//private TemperatureController temperatureController;
 	// oppure
 	private TemperatureController temperatureController = new TemperatureController();
-  
+  	 
     @GET
     public Response temp(){
-        return Response.ok("Hello T3 world !").build();
+        return Response.ok("Hello world !").build();
     }
       	
     @GET

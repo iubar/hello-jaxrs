@@ -16,6 +16,7 @@ REM creo una copia del war così poi posso eseguire "mvn clean test" altrimenti 
 
 ECHO Copying target\%WAR_FILE% to %LIBERTY_FOLDER%\dropins\%WAR_FILE% ...
 
+COPY temperature.txt %LIBERTY_FOLDER%\
 COPY target\%WAR_FILE% %LIBERTY_FOLDER%\dropins\%WAR_FILE%
 
 CD %mypath%

@@ -13,6 +13,7 @@ pipeline {
 		MAVEN_CLI_OPTS = '--batch-mode --show-version'
 		HOST = '127.0.0.1'
 		ROUTE = 'hello-jaxrs/hello'
+		ROUTE = 'hello-jaxrs/temp/c'
 		WAR_FILE = 'hello-jaxrs.war'
 	}    
     stages {
@@ -43,11 +44,13 @@ pipeline {
 		stage ('Staging') {
             steps {
 				sh '''
-				cat server.xml
+				cat ${LIBERTY_FOLDER}/server.xml
+				cp temperature.txt ${LIBERTY_FOLDER}/
 				cp target/${WAR_FILE} ${LIBERTY_FOLDER}/dropins/
 				${LIBERTY_ROOT}/bin/server start myserver --clean				
 				nc -v -z -w3 $HOST 9080
 				nc -v -z -w3 $HOST 9443
+				
 				HTTP_CODE=$(curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE})
 				if [ $HTTP_CODE = 200 ]; then
 					echo "INFO: response code is $HTTP_CODE"
@@ -55,6 +58,15 @@ pipeline {
 					echo "ERROR: response code is $HTTP_CODE"
 					exit 1
 				fi
+				
+				HTTP_CODE=$(curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE2})
+				if [ $HTTP_CODE = 200 ]; then
+					echo "INFO: response code is $HTTP_CODE"
+				else
+					echo "ERROR: response code is $HTTP_CODE"
+					exit 1
+				fi
+								
 				'''
             }
         }
