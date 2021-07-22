@@ -43,6 +43,7 @@ pipeline {
 		stage ('Staging') {
             steps {
 				sh '''
+				cat server.xml
 				cp target/${WAR_FILE} ${LIBERTY_FOLDER}/dropins/
 				${LIBERTY_ROOT}/bin/server start myserver --clean				
 				nc -v -z -w3 $HOST 9080
