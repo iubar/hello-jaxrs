@@ -13,7 +13,7 @@ pipeline {
 		MAVEN_CLI_OPTS = '--batch-mode --show-version'
 		HOST = '127.0.0.1'
 		ROUTE = 'hello-jaxrs/hello'
-		ROUTE = 'hello-jaxrs/temp/c'
+		ROUTE2 = 'hello-jaxrs/temp/c'
 		WAR_FILE = 'hello-jaxrs.war'
 	}    
     stages {
