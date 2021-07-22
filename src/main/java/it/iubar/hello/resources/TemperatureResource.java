@@ -12,16 +12,17 @@ import jakarta.ws.rs.core.Response;
  * Simple Hello World endpoint.
  * 
  */
-
 @Path("temp")
 public class TemperatureResource {
     
-  @Inject
-  private TemperatureController temperatureController;
+	//@Inject
+	//private TemperatureController temperatureController;
+	// oppure
+	private TemperatureController temperatureController = new TemperatureController();
   
     @GET
-    public Response hello(){
-        return Response.ok("Hello world !").build();
+    public Response temp(){
+        return Response.ok("Hello T3 world !").build();
     }
       	
     @GET

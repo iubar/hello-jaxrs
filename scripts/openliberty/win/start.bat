@@ -8,4 +8,8 @@ CALL %mypath%\env.bat
 
 START %LIBERTY_ROOT%\bin\server.bat start %LIBERTY_SERVER_NAME%
 
-CD %mypath%
+REM  CD %mypath%
+
+
+REM OPEN http://localhost:9080/hello-jaxrs/ (static file)
+REM OPEN http://localhost:9080/hello-jaxrs/hello

@@ -14,8 +14,8 @@
     <description>Hello - Jakarta RESTful Web Services</description>
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <version.jakartaee>9.0.0</version.jakartaee>
-		<version.jersey>3.0.1</version.jersey>
+        <version.jakartaee>9.1.0</version.jakartaee>
+		<version.jersey>3.0.2</version.jersey>
     </properties>
     <build>  
         <finalName>${project.artifactId}</finalName>

@@ -10,4 +10,4 @@ START %LIBERTY_ROOT%\bin\server.bat stop %LIBERTY_SERVER_NAME%
 
 ECHO %LIBERTY_ROOT%\bin\server.bat status %LIBERTY_SERVER_NAME%
 
-CD %mypath%
+REM CD %mypath%
