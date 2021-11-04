@@ -1,13 +1,7 @@
 @echo off
 
-SET mypath=%~dp0
-SET mypath=%mypath:~0,-1%
-ECHO Running from %mypath%
+CALL env.bat
 
-CALL %mypath%\env.bat
+CALL %LIBERTY_ROOT%\bin\server.bat stop %LIBERTY_SERVER_NAME%
 
-START %LIBERTY_ROOT%\bin\server.bat stop %LIBERTY_SERVER_NAME%
-
-START %LIBERTY_ROOT%\bin\server.bat status %LIBERTY_SERVER_NAME%
-
-REM CD %mypath%
+CALL %LIBERTY_ROOT%\bin\server.bat status %LIBERTY_SERVER_NAME%

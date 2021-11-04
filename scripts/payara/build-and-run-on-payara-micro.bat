@@ -8,7 +8,7 @@ set HOST_PORT=8080
 
 SET WAR_FILE=hello-jaxrs.war
 SET PAYARA_VER=5.2021.2
-SET WORKSPACE=%mypath%\..
+SET WORKSPACE=%mypath%\..\..
 
 CD %WORKSPACE%
 CALL mvn clean package

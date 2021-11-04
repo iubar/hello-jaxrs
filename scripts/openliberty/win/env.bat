@@ -1,5 +1,9 @@
 @echo off
 
+SET mypath=%~dp0
+SET mypath=%mypath:~0,-1%
+ECHO Running from %mypath%
+
 SET HOST=127.0.0.1
 SET HOST_PORT=9080
 SET POM_FILE=pom.xml

@@ -13,7 +13,11 @@ HOST_PORT=8080
 
 WAR_FILE=hello-jaxrs.war
 PAYARA_VER=5.2021.2
-WORKSPACE=${MY_PATH}/..
+
+# Jenkins definisce già la variabile d'ambiente WORKSPACE
+if [ -z "${WORKSPACE}" ]; then
+  WORKSPACE=$MY_PATH/../..
+fi
 
 cd ${WORKSPACE}
 mvn clean package
