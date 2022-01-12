@@ -21,4 +21,4 @@ SET WGET=%MY_APPS%\wget-1.21.1-1-win64\wget.exe
 REM https://www.7-zip.org/download.html
 SET SEVENZIP=%MY_APPS%\win_tools\7zip\7z1900-extra\x64\7za.exe
 
-SET ARTIFACTORY_BASE_URL=http://192.168.0.119:8081/artifactory
+SET ARTIFACTORY_BASE_URL=http://192.168.0.119:8082/artifactory
