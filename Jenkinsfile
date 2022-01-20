@@ -74,7 +74,7 @@ pipeline {
 	post {
         success {
         	sh 'mvn $MAVEN_CLI_OPTS dependency:analyze'
-			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates versions:display-plugin-updates'
+			sh 'mvn $MAVEN_CLI_OPTS versions:display-plugin-updates'
 			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates'          
         }	
         changed {
