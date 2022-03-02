@@ -15,7 +15,7 @@
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <version.jakartaee>9.1.0</version.jakartaee>
-		<version.jersey>3.0.3</version.jersey>
+		<version.jersey>3.0.4</version.jersey>
     </properties>
     <build>  
         <finalName>${project.artifactId}</finalName>
