@@ -37,7 +37,7 @@ pipeline {
         }
 		stage ('Deploy') {
             steps {
-                sh 'mvn $MAVEN_CLI_OPTS -DskipTests=true deploy'
+                sh 'mvn $MAVEN_CLI_OPTS -DskipTests deploy'
             }
         }
 		// Example: curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
