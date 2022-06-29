@@ -22,17 +22,19 @@ pipeline {
                 sh 'mvn $MAVEN_CLI_OPTS clean compile'
             }
         }
-        stage('Analyze') {
+        stage('Quality') {
+            when {
+              not {
+				  environment name: 'SKIP_SONARQUBE', value: 'true'
+			  }  
+            }
             steps {
-				// Pipeline's script step expects Groovy script, not Bash scrip
-				script {
-					try {
-						sh 'sonar-scanner'
-					} catch (err){
-						echo "SonarQube: analyze failed !!!"
-					}
-				}
-				sh 'mvn dependency:tree' 
+					sh '''
+	               			sonar-scanner
+							wget --user=${ARTIFACTORY_USER} --password=${ARTIFACTORY_PASS} http://192.168.0.119:8082/artifactory/iubar-repo-local/jenkins/jenkins-sonar-quality-gate-check.sh --no-check-certificate
+							chmod +x ./jenkins-sonar-quality-gate-check.sh
+							./jenkins-sonar-quality-gate-check.sh false # true / false = Ignore or not the quality gate score
+					'''
             }
         }
 		stage ('Deploy') {
@@ -73,6 +75,7 @@ pipeline {
     }
 	post {
         success {
+        	sh 'mvn $MAVEN_CLI_OPTS dependency:tree' 
         	sh 'mvn $MAVEN_CLI_OPTS dependency:analyze'
 			sh 'mvn $MAVEN_CLI_OPTS versions:display-plugin-updates'
 			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates'          
