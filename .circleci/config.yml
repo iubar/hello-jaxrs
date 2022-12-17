@@ -16,7 +16,7 @@ jobs:
             mvn test
       - run:
           name: Packaging
-          command: mvn -f -Dmaven.test.skip=true clean package
+          command: mvn -Dmaven.test.skip=true clean package
       - run:
           name: Outdated
           command: mvn versions:display-dependency-updates
