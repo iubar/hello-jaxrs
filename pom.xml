@@ -14,8 +14,9 @@
     <description>Hello - Jakarta RESTful Web Services</description>
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <version.jakartaee>9.1.0</version.jakartaee>
-		<version.jersey>3.0.4</version.jersey>
+        <!-- ATTENZIONE: quando cambi il seguente valore, modifica anche il file server.xml sull'istanza OpenLiberty ' -->
+        <version.jakartaee>10.0.0</version.jakartaee>
+		<version.jersey>3.0.8</version.jersey>
     </properties>
     <build>  
         <finalName>${project.artifactId}</finalName>
