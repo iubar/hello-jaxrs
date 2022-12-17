@@ -1,5 +1,4 @@
 version: 2.1
-# see https://circleci.com/docs/language-java-maven/
 jobs:
   build:
     working_directory: ~/repo
@@ -7,7 +6,6 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
-      # - run: ./mvnw -Dmaven.test.skip=true package
       - run:
           name: Testing
           command: |
