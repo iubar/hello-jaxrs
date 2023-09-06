@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>it.iubar.pom</groupId>
-		<artifactId>iubar-pom-next</artifactId>
+		<artifactId>iubar-pom-jaxrs</artifactId>
 		<version>0.0.1</version>
 	</parent> 	
     <groupId>it.iubar</groupId>
@@ -12,36 +12,9 @@
     <packaging>war</packaging>
     <name>Hello JAX-RS</name>
     <description>Hello - Jakarta RESTful Web Services</description>
-    <properties>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-        <!-- ATTENZIONE: quando cambi il seguente valore, modifica anche il file server.xml sull'istanza OpenLiberty ' -->
-        <version.jakartaee>10.0.0</version.jakartaee>
-		<version.jersey>3.0.11</version.jersey> <!-- 3.0.x is the latest version that supports java8 -->
-    </properties>
+ 
     <build>  
         <finalName>${project.artifactId}</finalName>
     </build>  
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>${version.jakartaee}</version>
-            <scope>provided</scope>
-        </dependency>
-		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
-		<dependency>
-		    <groupId>org.glassfish.jersey.core</groupId>
-		    <artifactId>jersey-client</artifactId>
-		    <version>${version.jersey}</version>
-			<scope>test</scope> 
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
-		<dependency>
-		    <groupId>org.glassfish.jersey.inject</groupId>
-		    <artifactId>jersey-hk2</artifactId>
-		    <version>${version.jersey}</version>
-			<scope>test</scope> 
-		</dependency>		
-     </dependencies>
+ 
 </project>
