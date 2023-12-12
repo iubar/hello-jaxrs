@@ -7,4 +7,4 @@ CALL %LIBERTY_ROOT%\bin\server.bat status %LIBERTY_SERVER_NAME%
 CALL %LIBERTY_ROOT%\bin\server.bat version
 CALL %LIBERTY_ROOT%\bin\server.bat list
 
-ECHO "OPEN http://localhost:9080/hello-jaxrs/hello"
+ECHO OPEN http://localhost:9080/hello-jaxrs/hello

@@ -6,10 +6,10 @@ ECHO Running from %mypath%
 
 SET HOST=127.0.0.1
 SET HOST_PORT=9080
-SET POM_FILE=pom.xml
 SET WAR_FILE=hello-jaxrs.war
 SET OPENLIBERTY_VER=23.0.0.1
 SET WORKSPACE=%mypath%\..\..\..
+SET POM_FILE=%WORKSPACE%\pom.xml
 
 SET LIBERTY_SERVER_NAME=myserver
 SET LIBERTY_ROOT=%MY_APPS%\java_tools\openliberty\%OPENLIBERTY_VER%\wlp
