@@ -10,7 +10,8 @@ pipeline {
 		ansiColor('xterm')
 	}    
 	environment {	
-		MAVEN_CLI_OPTS = '--batch-mode --show-version'
+		MAVEN_ARGS = '--show-version --batch-mode'
+		MAVEN_OPTS = '-Djava.awt.headless=true'
 		HOST = '127.0.0.1'
 		ROUTE = 'hello-jaxrs/hello'
 		ROUTE2 = 'hello-jaxrs/temp/c'
@@ -19,7 +20,7 @@ pipeline {
     stages {
 		stage ('Build') {
             steps {
-                sh 'mvn $MAVEN_CLI_OPTS clean compile'
+                sh 'mvn $MAVEN_ARGS $MAVEN_OPTS clean compile'
             }
         }
         stage('Quality') {
@@ -39,7 +40,7 @@ pipeline {
         }
 		stage ('Deploy') {
             steps {
-                sh 'mvn $MAVEN_CLI_OPTS -DskipTests deploy'
+                sh 'mvn $MAVEN_ARGS $MAVEN_OPTS -DskipTests deploy'
             }
         }
 		// Example: curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
@@ -75,14 +76,14 @@ pipeline {
     }
 	post {
         success {
-        	sh 'mvn $MAVEN_CLI_OPTS dependency:tree' 
-        	sh 'mvn $MAVEN_CLI_OPTS dependency:analyze'
-			sh 'mvn $MAVEN_CLI_OPTS versions:display-plugin-updates'
-			sh 'mvn $MAVEN_CLI_OPTS versions:display-dependency-updates'          
+        	sh 'mvn $MAVEN_ARGS $MAVEN_OPTS dependency:tree' 
+        	sh 'mvn $MAVEN_ARGS $MAVEN_OPTS dependency:analyze'
+			sh 'mvn $MAVEN_ARGS $MAVEN_OPTS versions:display-plugin-updates'
+			sh 'mvn $MAVEN_ARGS $MAVEN_OPTS versions:display-dependency-updates'          
         }	
         changed {
 			echo "CURRENT STATUS: ${currentBuild.currentResult}"
-			sh "curl -H 'JENKINS: Pipeline Hook Iubar' -i -X GET -G ${env.IUBAR_WEBHOOK_URL} -d status=${currentBuild.currentResult} -d project_name='${JOB_NAME}'"
+			sh "curl -H 'JENKINS: Pipeline Hook Iubar' -i -X GET -G ${env.IUBAR_WEBHOOK_URL} -d status=${currentBuild.currentResult} -d job_name='${JOB_NAME}' -d build_number='${BUILD_NUMBER}'"
         }
 		cleanup { // see https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline
 			cleanWs() // Workspace Cleanup Plugin (https://jenkins.io/doc/pipeline/steps/ws-cleanup/#cleanws-delete-workspace-when-build-is-done)

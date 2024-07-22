@@ -1,5 +1,7 @@
 @echo off
 
+SETLOCAL
+
 CALL env.bat
 
 CD %WORKSPACE%

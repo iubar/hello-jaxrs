@@ -1,4 +1,6 @@
-@echo off
+@ECHO off
+
+SETLOCAL
 
 CALL env.bat
 

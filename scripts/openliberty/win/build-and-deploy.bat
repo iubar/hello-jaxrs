@@ -1,18 +1,21 @@
-@echo off
+@ECHO off
+
+SETLOCAL
 
 CALL env.bat
 
 CD %WORKSPACE%
 
 CALL mvn -f %POM_FILE% -Dmaven.test.skip=true clean package
+IF %ERRORLEVEL% NEQ 0 EXIT /b %ERRORLEVEL%
 
-REM IF %ERRORLEVEL% NEQ 0 EXIT 1
+SET FROM=%WORKSPACE%\target\%WAR_FILE%
+SET TO=%LIBERTY_FOLDER%\dropins\%WAR_FILE%
 
-REM creo una copia del war così poi posso eseguire "mvn clean test" altrimenti la cartella "target" sarebbe bloccata dai processi di Payara
-
-ECHO Copying target\%WAR_FILE% to %LIBERTY_FOLDER%\dropins\%WAR_FILE% ...
-
+ECHO CURRENT PATH IS %CD%
+ECHO Copying from %FROM% to %TO% ...
+COPY %FROM% %TO%
+ECHO Copying from temperature.txt to %LIBERTY_FOLDER%\ ...
 COPY temperature.txt %LIBERTY_FOLDER%\
-COPY target\%WAR_FILE% %LIBERTY_FOLDER%\dropins\%WAR_FILE%
 
 CD %mypath%
