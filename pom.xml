@@ -8,9 +8,7 @@
     <name>Hello JAX-RS</name>
     <description>Hello - Jakarta RESTful Web Services</description>
     <properties>        
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
-		<!-- <maven.compiler.release>${maven.compiler.target}</maven.compiler.release> -->  <!-- Alternativa a entrambi i valori di maven.compiler.*. E' disopnibile da jdk>=9 (vedi https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html )-->
+        <maven.compiler.release>11</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.jakartaee>10.0.0</version.jakartaee>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
