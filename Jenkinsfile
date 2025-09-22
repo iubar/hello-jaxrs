@@ -16,6 +16,7 @@ pipeline {
 		ROUTE = 'hello-jaxrs/hello'
 		ROUTE2 = 'hello-jaxrs/temp/c'
 		WAR_FILE = 'hello-jaxrs.war'
+		LIBERTY_FOLDER = "/opt/openliberty/usr/servers/myserver"	
 	}    
     stages {
 		stage ('Build') {
