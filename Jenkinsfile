@@ -47,6 +47,23 @@ pipeline {
 		// Example: curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
 		stage ('Staging') {
             steps {
+				// Clone progetto contenente gli script bash per OpenLiberty
+				// sh 'git clone https://gitlab.iubar.it/iubar/liberty-scripts.git'				
+            	// Configuro dipendenze
+            	sh '''
+            	    hostname
+				    whoami
+	            	cd liberty-scripts/scripts/linux
+					chmod +x deploy-shared-libs.sh	
+					bash deploy-shared-libs.sh colf							
+				'''				
+				// Configuro l'application server
+				sh '''
+  					echo "LIBERTY_ROOT=${LIBERTY_ROOT}"				
+  					echo "LIBERTY_FOLDER=${LIBERTY_FOLDER}"  				
+					cp src/main/liberty/config/server.xml ${LIBERTY_FOLDER}/server.xml
+				'''
+				// ...commentare qui cosa sto facendo....				
 				sh '''
 				cat ${LIBERTY_FOLDER}/server.xml
 				cp temperature.txt ${LIBERTY_FOLDER}/
