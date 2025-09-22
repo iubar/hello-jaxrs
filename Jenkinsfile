@@ -16,7 +16,8 @@ pipeline {
 		ROUTE = 'hello-jaxrs/hello'
 		ROUTE2 = 'hello-jaxrs/temp/c'
 		WAR_FILE = 'hello-jaxrs.war'
-		LIBERTY_FOLDER = "/opt/openliberty/usr/servers/myserver"	
+		LIBERTY_SERVER_NAME = "myserver"
+		LIBERTY_FOLDER = "/opt/openliberty/usr/servers/${LIBERTY_SERVER_NAME}"	
 	}    
     stages {
 		stage ('Build') {
@@ -46,11 +47,15 @@ pipeline {
         }
 		// Example: curl --insecure --location --silent --show-error --output /dev/null --write-out "%{http_code}" http://${HOST}:9080/${ROUTE} | xargs echo "Response http code: "		
 		stage ('Staging') {
-            steps {			
-				// Configuro l'application server
+            steps {											
+				// Creo server
 				sh '''
   					echo "LIBERTY_ROOT=${LIBERTY_ROOT}"				
   					echo "LIBERTY_FOLDER=${LIBERTY_FOLDER}"  				
+					${LIBERTY_ROOT}/bin/server create ${LIBERTY_SERVER_NAME}
+				'''								
+				// Configuro l'application server
+				sh '''				
 					cp src/main/liberty/config/server.xml ${LIBERTY_FOLDER}/server.xml
 				'''
 				// ...commentare qui cosa sto facendo....				
@@ -58,7 +63,7 @@ pipeline {
 				cat ${LIBERTY_FOLDER}/server.xml
 				cp temperature.txt ${LIBERTY_FOLDER}/
 				cp target/${WAR_FILE} ${LIBERTY_FOLDER}/dropins/
-				${LIBERTY_ROOT}/bin/server start myserver --clean				
+				${LIBERTY_ROOT}/bin/server start ${LIBERTY_SERVER_NAME} --clean				
 				nc -v -z -w3 $HOST 9080
 				nc -v -z -w3 $HOST 9443
 				
