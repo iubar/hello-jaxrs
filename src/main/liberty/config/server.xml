@@ -106,12 +106,9 @@ Read:
 		<!-- ${server.config.dir} is ${wlp.user.dir}/servers/${wlp.server.name} -->
 		<fileset dir="${server.config.dir}/lib/global" includes="*.jar" />
 	</library>	
-	<library id="CHANGEMEIN_global" >
-		<!-- ${shared.resource.dir} is is ${wlp.user.dir}/shared/resources -->
-		<fileset dir="${shared.resource.dir}" includes="*.jar" />
-	</library>	
+ 
    
-  <application name="JakartaColf" location="iubar-paghe-jaxrs.war" type="war" context-root="iubar-paghe-jaxrs">
+  <application name="HelloJaxrs" location="hello-jaxrs.war" type="war" context-root="hello-jaxrs">
 <classloader  commonLibraryRef="colfLib"  />	
   </application>
     

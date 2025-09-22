@@ -55,7 +55,11 @@ pipeline {
 					${LIBERTY_ROOT}/bin/server create ${LIBERTY_SERVER_NAME}
 				'''								
 				// Configuro l'application server
-				sh '''				
+				sh '''
+				    ls /opt/openliberty/
+				    ls /opt/openliberty/usr
+				    ls /opt/openliberty/usr/servers
+				    ls ${LIBERTY_FOLDER}
 					cp src/main/liberty/config/server.xml ${LIBERTY_FOLDER}/server.xml
 				'''
 				// ...commentare qui cosa sto facendo....				
