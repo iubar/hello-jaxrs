@@ -17,7 +17,7 @@ pipeline {
 		ROUTE2 = 'hello-jaxrs/temp/c'
 		WAR_FILE = 'hello-jaxrs.war'
 		LIBERTY_SERVER_NAME = "myserver"
-		LIBERTY_FOLDER = "/opt/openliberty/usr/servers/${LIBERTY_SERVER_NAME}"	
+		LIBERTY_FOLDER = "/opt/openliberty/wlp/usr/servers/${LIBERTY_SERVER_NAME}"	
 	}    
     stages {
 		stage ('Build') {
@@ -57,8 +57,8 @@ pipeline {
 				// Configuro l'application server
 				sh '''
 				    ls /opt/openliberty/
-				    ls /opt/openliberty/usr
-				    ls /opt/openliberty/usr/servers
+				    ls /opt/openliberty/wlp/usr
+				    ls /opt/openliberty/wlp/usr/servers
 				    ls ${LIBERTY_FOLDER}
 					cp src/main/liberty/config/server.xml ${LIBERTY_FOLDER}/server.xml
 				'''
