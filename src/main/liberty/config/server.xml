@@ -1,0 +1,137 @@
+<server description="Iubar Jakarta Colf">
+
+<!--
+ - https://www.ibm.com/docs/en/was-liberty/base?topic=liberty-logging-trace 
+ - https://www.ibm.com/support/pages/set-trace-and-get-full-dump-websphere-liberty 
+-->
+
+<!-- 
+	<logging traceSpecification="*=all:com.ibm.ws.*=all" maxFiles="3" maxFileSize="20" /> 
+	<logging traceSpecification="*=fine" consoleLogLevel="info" messageSource="message,trace,accessLog,ffdc,audit" />
+	-->
+<!-- 	
+consoleLogLevel:
+ This filter controls the granularity of messages that go to the console. 
+ The valid values are INFO, AUDIT, WARNING, ERROR, and OFF. 
+ By default, the consoleLogLevel is set to the WLP_LOGGING_CONSOLE_LOGLEVEL environment variable (if set) or AUDIT.
+ 
+ (https://openliberty.io/docs/latest/log-trace-configuration.html)
+ 
+ 
+-->
+
+<logging traceSpecification="*=info" consoleLogLevel="INFO" maxFiles="3" maxFileSize="10" hideMessage="SRVE9967W" />
+ 
+  <featureManager>
+          <feature>jakartaee-10.0</feature>
+   <feature>transportSecurity-1.0</feature>
+    <feature>restfulWS-3.1</feature>
+    <feature>jsonb-3.0</feature>
+    <feature>jsonp-2.1</feature>
+    <feature>cdi-4.0</feature>    
+    <feature>persistence-3.1</feature>
+<!--  <feature>servlet-6.0</feature>  -->
+    <feature>mpConfig-3.1</feature>
+    <feature>mpRestClient-3.0</feature>
+   <feature>mpOpenAPI-3.1</feature>
+ 
+  </featureManager>
+ 
+  <variable name="http.port" defaultValue="9080" />
+  <variable name="https.port" defaultValue="9443" />
+<!-- <variable name="app.context.root" defaultValue="ServletSample"/>-->
+ 
+<!--		      
+	https://www.ibm.com/docs/en/was-liberty/nd?topic=liberty-directory-locations-properties
+	https://openliberty.io/docs/latest/reference/default-environment-variables.html 
+-->
+
+
+
+    <!-- This template enables security. To get the full use of all the capabilities, a keystore and user registry are required. -->
+
+    <!-- For the keystore, default keys are generated and stored in a keystore. To provide the keystore password, generate an
+         encoded password using bin/securityUtility encode and add it below in the password attribute of the keyStore element.
+         Then uncomment the keyStore element. -->
+    <!--
+    <keyStore password=""/>
+    -->
+
+    <!--For a user registry configuration, configure your user registry. For example, configure a basic user registry using the
+        basicRegistry element. Specify your own user name below in the name attribute of the user element. For the password,
+        generate an encoded password using bin/securityUtility encode and add it in the password attribute of the user element.
+        Then uncomment the user element. -->
+    <basicRegistry id="basic" realm="BasicRealm">
+        <!-- <user name="yourUserName" password="" />  -->
+    </basicRegistry>
+    
+    
+
+  <httpEndpoint httpPort="${http.port}" httpsPort="${https.port}" id="defaultHttpEndpoint" host="*" />
+
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
+    <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
+	
+	
+ <!--
+	<library id="jaybird">
+		      <file name="${shared.resource.dir}/jaybird-5.0.6.java11.jar" />
+	</library>
+ -->
+ 
+ 
+<!--
+ATTENZIONE
+Global libraries can be used by any application. JAR files are placed in a global library directory, and then are specified in the class loader configuration for each application.
+You can place global libraries in two locations:
+${shared.config.dir}/lib/global
+${server.config.dir}/lib/global
+If there are files present in these locations at the time an application is started, 
+and that application does not have a <classloader> element configured, 
+the application uses these libraries. 
+If a class loader configuration is present, these libraries are not used unless the global library is explicitly referenced.
+Read:
+ - https://www.ibm.com/docs/en/was-liberty/core?topic=applications-shared-libraries )
+ - https://www.ibm.com/docs/en/was-liberty/nd?topic=applications-shared-libraries 
+ - https://www.ibm.com/docs/en/was-liberty/nd?topic=applications-sharing-library-across-multiple-java-ee
+-->
+ 
+ 
+ <!-- https://www.ibm.com/docs/en/was-liberty/nd?topic=liberty-directory-locations-properties -->
+ 
+ 	<library id="colfLib" >
+		<!-- ${server.config.dir} is ${wlp.user.dir}/servers/${wlp.server.name} -->
+		<fileset dir="${server.config.dir}/lib/global" includes="*.jar" />
+	</library>	
+	<library id="CHANGEMEIN_global" >
+		<!-- ${shared.resource.dir} is is ${wlp.user.dir}/shared/resources -->
+		<fileset dir="${shared.resource.dir}" includes="*.jar" />
+	</library>	
+   
+  <application name="JakartaColf" location="iubar-paghe-jaxrs.war" type="war" context-root="iubar-paghe-jaxrs">
+<classloader  commonLibraryRef="colfLib"  />	
+  </application>
+    
+ 	<!--	
+	<dataSource id="DefaultDataSource" jndiName="jdbc/firebirdSQL" type="javax.sql.ConnectionPoolDataSource" transactional="true">
+	 
+		<jdbcDriver libraryRef="jaybird"
+					java.sql.Driver="com.mysql.jdbc.Driver"
+		            javax.sql.DataSource="org.firebirdsql.ds.FBSimpleDataSource"            
+		            javax.sql.ConnectionPoolDataSource="org.firebirdsql.ds.FBConnectionPoolDataSource"  
+		            javax.sql.XADataSource="org.firebirdsql.ds.FBXADataSource"
+		/>                          
+        <properties 
+          databaseName="c:/firebird_data5/anag.fdb"
+          user="sysdba"
+          password="masterkey" 
+          portNumber="3050"
+          serverName="localhost"               
+          />         
+	</dataSource>  
+ -->
+ 
+</server>
